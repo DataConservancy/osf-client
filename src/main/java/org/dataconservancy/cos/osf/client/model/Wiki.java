@@ -17,15 +17,12 @@ package org.dataconservancy.cos.osf.client.model;
 
 import static org.dataconservancy.cos.osf.client.support.JodaSupport.DATE_TIME_FORMATTER_ALT;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonSetter;
 import org.dataconservancy.cos.osf.client.support.DateTimeTransform;
 import org.dataconservancy.cos.osf.client.support.DownloadLinkTransform;
-import org.dataconservancy.cos.osf.client.support.FileIdTransform;
 import org.dataconservancy.cos.osf.client.support.JodaSupport;
 import org.dataconservancy.cos.osf.client.support.ProviderIdTransform;
 import org.dataconservancy.cos.rdf.annotations.IndividualUri;
@@ -45,68 +42,33 @@ import com.github.jasminb.jsonapi.annotations.Relationship;
 import com.github.jasminb.jsonapi.annotations.Type;
 
 
-/**
- * Wiki model for OSF
- * Created by Ben Trumbore on 9/16/2016.
- */
-//@Type("wiki")
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//@OwlIndividual(OwlClasses.OSF_WIKI)
 public class Wiki {
 
-    /*unique OSF ID for the file**/
-    //@Id
-    //@IndividualUri(transform = ProviderIdTransform.class)
     private String id;
 
-    /**list of comments associated with wiki*/
-    //@Relationship(value = "comments", resolve = true, relType = RelType.RELATED, strategy = ResolutionStrategy.OBJECT)
     private List<Comment> comments;
 
-    /**Gets other links found in data.links:{} section of JSON**/
-    //@Links
-    //@OwlProperty(value = OwlProperties.OSF_HAS_BINARYURI, transform = DownloadLinkTransform.class)
-    Map<String, ?> links;
+    private Map<String, ?> links;
 
-    /**name of the wiki; used for display*/
-    //@OwlProperty(OwlProperties.OSF_HAS_NAME)
     private String name;
 
-    /**"file" or "folder"*/
-    //@OwlProperty(OwlProperties.OSF_HAS_HASKIND)
     private String kind;
 
-    /**the unix-style path to the file relative to the provider root*/
-    //@OwlProperty(OwlProperties.OSF_HAS_MATERIALIZEDPATH)
     private String materialized_path;
 
-    /**timestamp of when this wiki was last updated*/
-    //@OwlProperty(value = OwlProperties.OSF_HAS_DATEMODIFIED, transform = DateTimeTransform.class)
     private DateTime date_modified;
 
-    /**node this wiki belongs to*/
-    //@OwlProperty(OwlProperties.OSF_HAS_NODE)
     private String node;
 
-    /**user that owns this wiki*/
-    //@OwlProperty(OwlProperties.OSF_HAS_NODE)
     private String user;
 
-    /**same as for corresponding WaterButler entity*/
-    //@OwlProperty(OwlProperties.OSF_HAS_PATH)
     private String path;
 
-    /**  */
-    //@OwlProperty(OwlProperties.OSF_HAS_PATH)
     private String content_type;
 
-    /**version of wiki*/
-    //@OwlProperty(OwlProperties.OSF_HAS_SIZE)
-    private Integer version;
+    private Map<String, ?> extra; // for "version"
 
-    /**size of wiki in bytes, null for folders*/
-    //@OwlProperty(OwlProperties.OSF_HAS_SIZE)
-    private Integer size;
+    private int size;
 
 
     public String getKind() {
@@ -181,21 +143,27 @@ public class Wiki {
         this.content_type = content_type;
     }
 
-    public Integer getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(int size) {
         this.size = size;
     }
 
-    public Integer getVersion() {
-        return version;
+    public Map<String, ?> getLinks() {
+        return links;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setLinks(Map<String, ?> links) {
+        this.links = links;
     }
+
+    public Map<String, ?> getVersion() {
+        return extra;
+    }
+
+    public void setVersion(Map<String, ?> extra) { this.extra = extra; }
 
     public String getId() {
         return id;
