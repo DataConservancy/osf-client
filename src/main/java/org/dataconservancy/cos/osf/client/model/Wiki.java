@@ -42,12 +42,17 @@ import com.github.jasminb.jsonapi.annotations.Relationship;
 import com.github.jasminb.jsonapi.annotations.Type;
 
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Type("wikis")
 public class Wiki {
 
+    @Id
     private String id;
 
+    @Relationship(value = "comments", resolve = true, relType = RelType.RELATED, strategy = ResolutionStrategy.OBJECT)
     private List<Comment> comments;
 
+    @Links
     private Map<String, ?> links;
 
     private String name;
@@ -58,8 +63,10 @@ public class Wiki {
 
     private DateTime date_modified;
 
+    @Relationship(value = "node", resolve = true, relType = RelType.RELATED, strategy = ResolutionStrategy.REF)
     private String node;
 
+    @Relationship(value = "user", resolve = true, relType = RelType.RELATED, strategy = ResolutionStrategy.REF)
     private String user;
 
     private String path;
@@ -103,15 +110,15 @@ public class Wiki {
         this.name = name;
     }
 
-    public String getMaterialized_path() {
+    public String getMaterializedPath() {
         return materialized_path;
     }
 
-    public void setMaterialized_path(String materialized_path) {
+    public void setMaterializedPath(String materialized_path) {
         this.materialized_path = materialized_path;
     }
 
-    public String getDate_modified() {
+    public String getDateModified() {
         if (this.date_modified!=null) {
             return this.date_modified.toString(DATE_TIME_FORMATTER_ALT);
         } else {
@@ -119,7 +126,7 @@ public class Wiki {
         }
     }
 
-    public void setDate_modified(String date_modified) {
+    public void setDateModified(String date_modified) {
         if (date_modified!=null){
             this.date_modified = JodaSupport.parseDateTime(date_modified);
         } else {
@@ -155,6 +162,7 @@ public class Wiki {
         return links;
     }
 
+    @JsonProperty("links")
     public void setLinks(Map<String, ?> links) {
         this.links = links;
     }
