@@ -112,6 +112,8 @@ public interface OsfService {
     @GET
     Call<List<Contributor>> contributors(@Url String url);
 
+    @GET
+    Call<List<Wiki>> wikis(@Url String url);
 
     //Call<List<NodeFile>> listFiles(@Path(""))
 }
