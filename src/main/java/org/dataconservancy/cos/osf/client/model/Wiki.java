@@ -19,10 +19,7 @@ import static org.dataconservancy.cos.osf.client.support.JodaSupport.DATE_TIME_F
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.dataconservancy.cos.osf.client.support.DateTimeTransform;
-import org.dataconservancy.cos.osf.client.support.DownloadLinkTransform;
 import org.dataconservancy.cos.osf.client.support.JodaSupport;
 import org.dataconservancy.cos.osf.client.support.ProviderIdTransform;
 import org.dataconservancy.cos.rdf.annotations.IndividualUri;
@@ -110,15 +107,15 @@ public class Wiki {
         this.name = name;
     }
 
-    public String getMaterializedPath() {
+    public String getMaterialized_path() {
         return materialized_path;
     }
 
-    public void setMaterializedPath(String materialized_path) {
+    public void setMaterialized_path(String materialized_path) {
         this.materialized_path = materialized_path;
     }
 
-    public String getDateModified() {
+    public String getDate_modified() {
         if (this.date_modified!=null) {
             return this.date_modified.toString(DATE_TIME_FORMATTER_ALT);
         } else {
@@ -126,7 +123,7 @@ public class Wiki {
         }
     }
 
-    public void setDateModified(String date_modified) {
+    public void setDate_modified(String date_modified) {
         if (date_modified!=null){
             this.date_modified = JodaSupport.parseDateTime(date_modified);
         } else {
@@ -142,11 +139,11 @@ public class Wiki {
         this.path = path;
     }
 
-    public String getContentType() {
+    public String getContent_type() {
         return content_type;
     }
 
-    public void setContentType(String content_type) {
+    public void setContent_type(String content_type) {
         this.content_type = content_type;
     }
 
@@ -167,11 +164,11 @@ public class Wiki {
         this.links = links;
     }
 
-    public Map<String, ?> getVersion() {
+    public Map<String, ?> getExtra() {
         return extra;
     }
 
-    public void setVersion(Map<String, ?> extra) { this.extra = extra; }
+    public void setExtra(Map<String, ?> extra) { this.extra = extra; }
 
     public String getId() {
         return id;

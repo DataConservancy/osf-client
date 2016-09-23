@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -59,17 +60,17 @@ public class WikiTest extends AbstractMockServerTest {
 
         assertTrue(pjnbm.getNode().endsWith("ng9em/"));
         assertTrue(pjnbm.getUser().endsWith("3rty2/"));
-        // TODO - Can something be included for "comments"?
+        // TODO - Check "comments" here.
 
-        assertEquals(pjnbm.getKind(), "file");
-        assertEquals(pjnbm.getName(), "home");
-        //assertEquals(pjnbm.getDateModified(), "2016-09-13T22:24:10.128000");
-        //assertEquals(pjnbm.getContentType(), "text/markdown");
-        assertEquals(pjnbm.getPath(), "/pjnbm");
-        //assertEquals(pjnbm.getMaterializedPath(), "/pjnbm");
-        assertEquals(pjnbm.getSize(), 916);
-        assertEquals(pjnbm.getId(), "pjnbm");
-        // TODO - What to do about extra, which contains version?
+        assertEquals("file", pjnbm.getKind());
+        assertEquals("home", pjnbm.getName());
+        assertEquals("2016-09-13T22:24:10.128Z", pjnbm.getDate_modified());
+        assertEquals("text/markdown", pjnbm.getContent_type());
+        assertEquals("/pjnbm", pjnbm.getPath());
+        assertEquals("/pjnbm", pjnbm.getMaterialized_path());
+        assertEquals(916, pjnbm.getSize());
+        assertEquals("pjnbm", pjnbm.getId());
+        assertEquals(1, pjnbm.getExtra().get("version"));
 
     }
 }
