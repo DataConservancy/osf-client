@@ -40,12 +40,18 @@ public class JodaSupport {
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER_ALT_2 = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+    /**
+     * A Joda DateTimeFormatter which parses timezone-less strings as UTC using the pattern: {@code yyyy-MM-dd'T'HH:mm:ss}
+     */
+    public static final DateTimeFormatter DATE_TIME_FORMATTER_ALT_3 = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss").withZoneUTC();
+
     private static final List<DateTimeFormatter> DATE_TIME_FORMATTERS =
             new ArrayList<DateTimeFormatter>() {
                 {
                     add(DATE_TIME_FORMATTER);
                     add(DATE_TIME_FORMATTER_ALT);
                     add(DATE_TIME_FORMATTER_ALT_2);
+                    add(DATE_TIME_FORMATTER_ALT_3);
                 }
             };
 
@@ -58,6 +64,7 @@ public class JodaSupport {
      *   <li>yyyy-MM-dd'T'HH:mm:ss.SSSSSS</li>
      *   <li>yyyy-MM-dd'T'HH:mm:ss.SSS'Z'</li>
      *   <li>yyyy-MM-dd'T'HH:mm:ss'Z'</li>
+     *   <li>yyyy-MM-dd'T'HH:mm:ss</li>
      * </ul>
      *
      * @param dateTime a string representing a timestamp
@@ -72,7 +79,7 @@ public class JodaSupport {
                 // nothing we can do, try the next formatter in line, or error out below.
             }
         }
-        throw new RuntimeException("Unable to parse '" + dateTime + "' to a Joda DateTime object: Missing a DateTimeFormatter.");
+        throw new RuntimeException("Unable to parse '" + dateTime + "' to a Joda DateTime object: No DateTimeFormatter matches the pattern of '" + dateTime + "'");
     }
 
 }
